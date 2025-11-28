@@ -1,17 +1,19 @@
-// En veldig enkel "engine" for Mythrale-historien
+// En enkel "engine" for Mythrale-historien
 
-// Spillerens data
+// ---------------- SPILLERDATA ----------------
 const player = {
   name: "",
   courage: 0,
   kindness: 0,
 };
 
-// Historie-struktur: hver scene har id, tekst, bilde, valg og evt. stats-endringer
+let currentSceneId = "intro";
+
+// ---------------- SCENER ----------------
 const scenes = {
   intro: {
     id: "intro",
-    image: "", // du kan sette f.eks. "img/portal.jpg" senere
+    image: "", // legg til f.eks. "img/portal.jpg" senere
     text: (name) =>
       `En svak blå glød fyller nattehimmelen over Mythrale. Du står alene på kanten av en fjellhylle, med vinden som suser forbi. 
 ${name ? name + "," : "Du"} har ventet på dette øyeblikket lenge – i kveld åpner portalen til Akademiet for Lys og Skygger.`,
@@ -187,9 +189,7 @@ ${name ? name : "Du"} smiler – og Mythrale smiler tilbake.`,
   },
 };
 
-let currentSceneId = "intro";
-
-// Hjelpefunksjon: oppdater stats
+// ---------------- HJELPEFUNKSJONER ----------------
 function applyEffects(effects) {
   if (!effects) return;
   if (typeof effects.courage === "number") {
@@ -200,7 +200,6 @@ function applyEffects(effects) {
   }
 }
 
-// Render funksjon: viser riktig scene i HTML
 function renderScene() {
   const scene = scenes[currentSceneId];
   if (!scene) {
@@ -215,23 +214,27 @@ function renderScene() {
   const courageEl = document.getElementById("courage");
   const kindnessEl = document.getElementById("kindness");
 
-  sceneIdEl.textContent = "Scene: " + scene.id;
+  if (sceneIdEl) sceneIdEl.textContent = "Scene: " + scene.id;
 
   const name = player.name || "";
-  const text = typeof scene.text === "function" ? scene.text(name) : scene.text;
-  sceneDescriptionEl.textContent = text;
+  const text =
+    typeof scene.text === "function" ? scene.text(name) : scene.text;
+  if (sceneDescriptionEl) sceneDescriptionEl.textContent = text;
 
-  if (scene.image) {
-    sceneImageEl.src = scene.image;
-    sceneImageEl.style.opacity = "1";
-  } else {
-    sceneImageEl.src = "";
-    sceneImageEl.style.opacity = "0";
+  if (sceneImageEl) {
+    if (scene.image) {
+      sceneImageEl.src = scene.image;
+      sceneImageEl.style.opacity = "1";
+    } else {
+      sceneImageEl.src = "";
+      sceneImageEl.style.opacity = "0";
+    }
   }
 
-  courageEl.textContent = "Courage: " + player.courage;
-  kindnessEl.textContent = "Kindness: " + player.kindness;
+  if (courageEl) courageEl.textContent = "Courage: " + player.courage;
+  if (kindnessEl) kindnessEl.textContent = "Kindness: " + player.kindness;
 
+  if (!choicesEl) return;
   choicesEl.innerHTML = "";
   scene.choices.forEach((choice) => {
     const btn = document.createElement("button");
@@ -246,23 +249,38 @@ function renderScene() {
   });
 }
 
-// Init når siden er lastet
+// ---------------- KOBLING TIL FORSIDEN / START ----------------
 document.addEventListener("DOMContentLoaded", () => {
-  const nameInput = document.getElementById("player-name");
-  const saveNameBtn = document.getElementById("save-name-btn");
-  const restartBtn = document.getElementById("restart-btn");
+  const startButton = document.getElementById("start-btn");     // Start reisen
+  const nameInput = document.getElementById("player-name");     // Navnefelt på forsiden
+  const landing = document.getElementById("landing");           // Hele forsiden
+  const gameRoot = document.getElementById("game-root");        // Selve spillet
+  const restartBtn = document.getElementById("restart-btn");    // Restart-knapp i spillet
+  const nameDisplay = document.getElementById("player-name-display");
 
-  saveNameBtn.addEventListener("click", () => {
-    player.name = nameInput.value.trim();
-    renderScene();
-  });
-
-  restartBtn.addEventListener("click", () => {
+  function startGame() {
+    player.name = (nameInput?.value || "").trim() || "Reisende";
     player.courage = 0;
     player.kindness = 0;
     currentSceneId = "intro";
-    renderScene();
-  });
 
-  renderScene();
+    if (landing) landing.classList.add("hidden");
+    if (gameRoot) gameRoot.classList.remove("hidden");
+    if (nameDisplay) nameDisplay.textContent = player.name;
+
+    renderScene();
+  }
+
+  if (startButton) {
+    startButton.addEventListener("click", startGame);
+  }
+
+  if (restartBtn) {
+    restartBtn.addEventListener("click", () => {
+      player.courage = 0;
+      player.kindness = 0;
+      currentSceneId = "intro";
+      renderScene();
+    });
+  }
 });

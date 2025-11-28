@@ -1,25 +1,68 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="no">
 <head>
   <meta charset="UTF-8" />
-  <title>Mythrale – A Tiny Story Game</title>
+  <title>Mythrale – En liten magisk fortelling</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="app">
+  <!-- LANDING / FORSIDE -->
+  <div id="landing" class="hero-background" style="background-image: url('img/Start_bakgrun.png');">
+    <div class="overlay"></div>
+
+    <main class="hero-content">
+      <header class="hero-header">
+        <h1 class="game-logo">MYTHRALE</h1>
+        <p class="game-tagline">
+          Der lyset og skyggene møtes, og små valg får store følger.
+        </p>
+      </header>
+
+      <section class="hero-panel">
+        <p class="hero-text">
+          Du står ved kanten av en skjult dal, med nattehimmel som gløder svakt over fjellene.
+          I horisonten ser du de første sporene av en gammel magi som våkner.
+        </p>
+        <p class="hero-text">
+          Mythrale er en liten, interaktiv fortelling hvor du velger veien videre.
+          Ingen kamp, ingen tidsfrister – bare valg, stemning og et snev av nordlig magi.
+        </p>
+
+        <div class="hero-actions">
+          <div class="name-input-group">
+            <label for="player-name">Navnet ditt</label>
+            <input id="player-name" type="text" placeholder="Skriv navnet du vil bruke..." />
+          </div>
+
+          <button id="start-btn" class="primary-btn">
+            Start reisen
+          </button>
+        </div>
+
+        <p class="hero-note">
+          Når du trykker «Start reisen», går du inn i selve historien. Valgene dine vil påvirke hvordan Mythrale møter deg.
+        </p>
+      </section>
+    </main>
+
+    <footer class="hero-footer">
+      <span>Liten prototype laget i nettleseren · Utforsk historier, valg og magi</span>
+    </footer>
+  </div>
+
+  <!-- SPILLET -->
+  <div id="game-root" class="hidden">
     <header class="top-bar">
       <div class="game-title">Mythrale</div>
       <div class="player-info">
-        <label for="player-name">Name:</label>
-        <input id="player-name" type="text" placeholder="Type your name..." />
-        <button id="save-name-btn">OK</button>
+        <span id="player-name-display"></span>
+        <button id="restart-btn">Start på nytt</button>
       </div>
     </header>
 
     <main class="game-layout">
       <section class="scene-visual">
-        <!-- Du kan legge inn ekte bilder i img/-mappa senere -->
         <div class="image-placeholder">
           <img id="scene-image" src="" alt="Scene" />
         </div>
@@ -29,7 +72,7 @@
         <div id="scene-id" class="scene-id"></div>
         <div id="scene-description" class="scene-description"></div>
 
-        <div id="scene-stats" class="scene-stats">
+        <div class="scene-stats">
           <span id="courage">Courage: 0</span>
           <span id="kindness">Kindness: 0</span>
         </div>
@@ -37,12 +80,9 @@
         <div id="choices" class="choices"></div>
       </section>
     </main>
-
-    <footer class="footer">
-      <button id="restart-btn">Restart story</button>
-    </footer>
   </div>
 
+  <!-- SCRIPT -->
   <script src="script.js"></script>
 </body>
 </html>
