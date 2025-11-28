@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mythrale – A Tiny Story Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="top-bar">
+      <div class="game-title">Mythrale</div>
+      <div class="player-info">
+        <label for="player-name">Name:</label>
+        <input id="player-name" type="text" placeholder="Type your name..." />
+        <button id="save-name-btn">OK</button>
+      </div>
+    </header>
+
+    <main class="game-layout">
+      <section class="scene-visual">
+        <!-- Du kan legge inn ekte bilder i img/-mappa senere -->
+        <div class="image-placeholder">
+          <img id="scene-image" src="" alt="Scene" />
+        </div>
+      </section>
+
+      <section class="scene-text">
+        <div id="scene-id" class="scene-id"></div>
+        <div id="scene-description" class="scene-description"></div>
+
+        <div id="scene-stats" class="scene-stats">
+          <span id="courage">Courage: 0</span>
+          <span id="kindness">Kindness: 0</span>
+        </div>
+
+        <div id="choices" class="choices"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <button id="restart-btn">Restart story</button>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
