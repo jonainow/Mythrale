@@ -8,80 +8,87 @@
 </head>
 <body>
 
-<!-- ======================= -->
-<!--   BAKGRUNNSMUSIKK       -->
-<!-- ======================= -->
-<audio id="bg-music" loop>
-  <source src="img/music.mp3" type="audio/mpeg">
-</audio>
+  <!-- ======================= -->
+  <!--   BAKGRUNNSMUSIKK       -->
+  <!-- ======================= -->
+  <audio id="bg-music" loop>
+    <!-- Bytt ut src til din egen musikkfil hvis du vil -->
+    <source src="img/music.mp3" type="audio/mpeg">
+  </audio>
 
-<button id="music-toggle" class="music-btn hidden">🎵 Musikk av/på</button>
+  <button id="music-toggle" class="music-btn hidden">🎵 Musikk av/på</button>
 
-<!-- ======================= -->
-<!--   LANDING / FORSIDE     -->
-<!-- ======================= -->
-<div id="landing" class="hero-background" style="background-image: url('img/Start_bakgrun.png');">
-  <div class="overlay"></div>
+  <!-- ======================= -->
+  <!--   LANDING / FORSIDE     -->
+  <!-- ======================= -->
+  <div id="landing" class="hero-background" style="background-image: url('img/Start_bakgrun.png');">
+    <div class="overlay"></div>
 
-  <main class="hero-content fade-in">
-    <section class="hero-panel">
-      <header class="hero-header">
-        <h1 class="game-logo">MYTHRALE</h1>
-        <p class="game-tagline">Der lyset og skyggene møtes…</p>
-      </header>
+    <main class="hero-content fade-in">
+      <section class="hero-panel">
+        <header class="hero-header">
+          <h1 class="game-logo">MYTHRALE</h1>
+          <p class="game-tagline">Der lyset og skyggene møtes…</p>
+        </header>
 
-      <p class="hero-text">Du står ved kanten av en skjult dal. Luften glitrer av gammel magi.</p>
-      <p class="hero-text">Skriv inn navnet ditt for å begynne reisen.</p>
+        <p class="hero-text">Du står ved kanten av en skjult dal. Luften glitrer av gammel magi.</p>
+        <p class="hero-text">Skriv inn navnet ditt for å begynne reisen.</p>
 
-      <div class="hero-actions">
-        <div class="name-input-group">
-          <label for="player-name">Navnet ditt</label>
-          <input id="player-name" type="text" placeholder="Navn..." />
+        <div class="hero-actions">
+          <div class="name-input-group">
+            <label for="player-name">Navnet ditt</label>
+            <input id="player-name" type="text" placeholder="Navn..." />
+          </div>
+
+          <button id="start-btn" class="primary-btn">Start reisen</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+
+  <!-- ======================= -->
+  <!--   SPILLVINDU            -->
+  <!-- ======================= -->
+  <div id="game-root" class="hero-background hidden" style="background-image: url('img/Start_bakgrun.png');">
+    <div class="overlay"></div>
+
+    <main class="hero-content fade-in">
+      <section class="hero-panel fade-box">
+
+        <header class="hero-header">
+          <h1 class="game-logo">MYTHRALE</h1>
+          <p class="game-tagline">
+            Velkommen, <span id="player-name-display"></span>.
+          </p>
+        </header>
+
+        <!-- Dialog-layout: portrett til venstre, tekst til høyre -->
+        <div class="dialogue-wrapper">
+          <div class="portrait-frame">
+            <img id="portrait-image" src="" alt="Karakter" />
+          </div>
+
+          <div class="dialogue-box">
+            <div id="scene-id" class="scene-id"></div>
+            <div id="scene-description" class="dialogue-text"></div>
+
+            <div class="scene-stats">
+              <span id="courage">Courage: 0</span>
+              <span id="kindness">Kindness: 0</span>
+            </div>
+
+            <div id="choices" class="choices"></div>
+          </div>
         </div>
 
-        <button id="start-btn" class="primary-btn">Start reisen</button>
-      </div>
-    </section>
-  </main>
-</div>
-
-
-<!-- ======================= -->
-<!--   SPILLVINDU            -->
-<!-- ======================= -->
-<div id="game-root" class="hero-background hidden" style="background-image: url('img/Start_bakgrun.png');">
-  <div class="overlay"></div>
-
-  <main class="hero-content fade-in">
-    <section class="hero-panel fade-box">
-
-      <header class="hero-header">
-        <h1 class="game-logo">MYTHRALE</h1>
-        <p class="game-tagline">
-          Velkommen, <span id="player-name-display"></span>.
-        </p>
-      </header>
-
-      <div class="scene-text">
-        <div id="scene-id" class="scene-id"></div>
-        <div id="scene-description" class="scene-description"></div>
-
-        <div class="scene-stats">
-          <span id="courage">Courage: 0</span>
-          <span id="kindness">Kindness: 0</span>
+        <div class="footer-actions">
+          <button id="restart-btn">Start på nytt</button>
         </div>
+      </section>
+    </main>
+  </div>
 
-        <div id="choices" class="choices"></div>
-      </div>
-
-      <div class="footer-actions">
-        <button id="restart-btn">Start på nytt</button>
-      </div>
-    </section>
-  </main>
-</div>
-
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>

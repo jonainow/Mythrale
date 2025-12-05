@@ -1,6 +1,7 @@
 /* =========================================================
    BASE
    ========================================================= */
+
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
@@ -13,8 +14,9 @@ body {
 }
 
 /* =========================================================
-   FULLSCREEN BACKGROUND
+   FULLSCREEN BAKGRUNN
    ========================================================= */
+
 .hero-background {
   position: relative;
   min-height: 100vh;
@@ -31,8 +33,9 @@ body {
 }
 
 /* =========================================================
-   CENTERED WINDOW PANEL
+   VINDU (PANEL) I MIDTEN
    ========================================================= */
+
 .hero-content {
   position: relative;
   z-index: 2;
@@ -45,7 +48,7 @@ body {
 
 .hero-panel {
   width: 100%;
-  max-width: 700px;
+  max-width: 750px;
   background: rgba(15, 23, 42, 0.95);
   padding: 2rem;
   border-radius: 1.4rem;
@@ -56,24 +59,26 @@ body {
 
 @keyframes fadeBox {
   from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* =========================================================
-   FADE ANIMATION
+   FADE OVERGANG
    ========================================================= */
+
 .fade-in {
   animation: fadeIn 0.8s ease;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; }
-  to { opacity: 1; }
+  to   { opacity: 1; }
 }
 
 /* =========================================================
-   HEADER & TEXT
+   HEADER & TEKST
    ========================================================= */
+
 .hero-header {
   text-align: center;
 }
@@ -90,8 +95,74 @@ body {
 }
 
 /* =========================================================
-   BUTTONS
+   DIALOG-UI
    ========================================================= */
+
+.dialogue-wrapper {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Portrett til venstre */
+.portrait-frame {
+  background: radial-gradient(circle at top, #111827, #020617);
+  border-radius: 1rem;
+  padding: 0.6rem;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#portrait-image {
+  width: 100%;
+  border-radius: 0.9rem;
+  object-fit: cover;
+}
+
+/* Selve snakkeboksen */
+.dialogue-box {
+  background: radial-gradient(circle at top, #1f2933, #111827);
+  border-radius: 1.2rem;
+  border: 2px solid #3b2f2f; /* svart/brun ramme */
+  padding: 1rem 1.3rem;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.7);
+}
+
+.scene-id {
+  font-size: 0.7rem;
+  opacity: 0.6;
+  margin-bottom: 0.3rem;
+}
+
+.dialogue-text {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 0.8rem;
+}
+
+/* Stats under teksten */
+.scene-stats {
+  display: flex;
+  gap: 1rem;
+  font-size: 0.8rem;
+  opacity: 0.75;
+  margin-bottom: 0.7rem;
+}
+
+/* Valg / svar knapper */
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* =========================================================
+   KNAPPER
+   ========================================================= */
+
 .primary-btn,
 .choice-btn,
 #restart-btn {
@@ -111,14 +182,19 @@ body {
   border-color: #38bdf8;
 }
 
+.choice-btn {
+  text-align: left;
+}
+
 /* =========================================================
-   CHARACTER SELECT GRID
+   CHARACTER SELECT GRID (før historien)
    ========================================================= */
+
 .character-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.2rem;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
 }
 
 .char-card {
@@ -156,14 +232,15 @@ body {
 }
 
 /* =========================================================
-   MUSIC BUTTON
+   MUSIKKKNAPP
    ========================================================= */
+
 .music-btn {
   position: fixed;
   top: 15px;
   right: 15px;
   z-index: 999;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.65);
   color: white;
   border: 1px solid #38bdf8;
   padding: 0.5rem 0.8rem;
@@ -174,4 +251,19 @@ body {
 
 .music-btn:hover {
   background: rgba(56,189,248,0.25);
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 640px) {
+  .dialogue-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .portrait-frame {
+    max-width: 200px;
+    margin: 0 auto;
+  }
 }
