@@ -7,7 +7,10 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- FORSIDE / LANDING -->
+
+  <!-- =========================== -->
+  <!-- LANDING (forside) -->
+  <!-- =========================== -->
   <div id="landing" class="hero-background" style="background-image: url('img/Start_bakgrun.png');">
     <div class="overlay"></div>
 
@@ -22,11 +25,9 @@
 
         <p class="hero-text">
           Du står ved kanten av en skjult dal, med nattehimmel som gløder svakt over fjellene.
-          I horisonten ser du de første sporene av en gammel magi som våkner.
         </p>
         <p class="hero-text">
-          Mythrale er en liten, interaktiv fortelling hvor du velger veien videre.
-          Ingen kamp, ingen tidsfrister – bare valg, stemning og et snev av nordlig magi.
+          Når du trer inn i Mythrale, vil hvert valg forme reisen din.
         </p>
 
         <div class="hero-actions">
@@ -41,30 +42,27 @@
         </div>
 
         <p class="hero-note">
-          Når du trykker «Start reisen», går du inn i selve historien. Valgene dine vil påvirke hvordan Mythrale møter deg.
+          Etter dette velger du karakter – jente eller gutt – før historien starter.
         </p>
       </section>
     </main>
-
-    <footer class="hero-footer">
-      <span>Liten prototype laget i nettleseren · Utforsk historier, valg og magi</span>
-    </footer>
   </div>
 
-  <!-- SELVE SPILLET (samme type vindu, fortsatt i midten) -->
-  <div id="game-root" class="hero-background hidden" style="background-image: url('img/Start_bakgrun.png');">
-    <div class="overlay"></div>
 
+  <!-- =========================== -->
+  <!-- GAME ROOT (selve spillet) -->
+  <!-- =========================== -->
+  <div id="game-root" class="game-background hidden">
     <main class="hero-content">
       <section class="hero-panel">
+
         <header class="hero-header">
           <h1 class="game-logo">MYTHRALE</h1>
           <p class="game-tagline">
-            Velkommen til Mythrale, <span id="player-name-display"></span>.
+            Velkommen, <span id="player-name-display"></span>.
           </p>
         </header>
 
-        <!-- Her kommer scenen inn -->
         <div class="scene-visual">
           <div class="image-placeholder">
             <img id="scene-image" src="" alt="Scene" />
@@ -86,6 +84,7 @@
         <div class="footer-actions">
           <button id="restart-btn">Start på nytt</button>
         </div>
+
       </section>
     </main>
   </div>
