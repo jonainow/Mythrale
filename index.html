@@ -7,19 +7,19 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <!-- LANDING / FORSIDE -->
+  <!-- FORSIDE / LANDING -->
   <div id="landing" class="hero-background" style="background-image: url('img/Start_bakgrun.png');">
     <div class="overlay"></div>
 
     <main class="hero-content">
-      <header class="hero-header">
-        <h1 class="game-logo">MYTHRALE</h1>
-        <p class="game-tagline">
-          Der lyset og skyggene møtes, og små valg får store følger.
-        </p>
-      </header>
-
       <section class="hero-panel">
+        <header class="hero-header">
+          <h1 class="game-logo">MYTHRALE</h1>
+          <p class="game-tagline">
+            Der lyset og skyggene møtes, og små valg får store følger.
+          </p>
+        </header>
+
         <p class="hero-text">
           Du står ved kanten av en skjult dal, med nattehimmel som gløder svakt over fjellene.
           I horisonten ser du de første sporene av en gammel magi som våkner.
@@ -51,38 +51,45 @@
     </footer>
   </div>
 
-  <!-- SPILLET -->
-  <div id="game-root" class="hidden">
-    <header class="top-bar">
-      <div class="game-title">Mythrale</div>
-      <div class="player-info">
-        <span id="player-name-display"></span>
-        <button id="restart-btn">Start på nytt</button>
-      </div>
-    </header>
+  <!-- SELVE SPILLET (samme type vindu, fortsatt i midten) -->
+  <div id="game-root" class="hero-background hidden" style="background-image: url('img/Start_bakgrun.png');">
+    <div class="overlay"></div>
 
-    <main class="game-layout">
-      <section class="scene-visual">
-        <div class="image-placeholder">
-          <img id="scene-image" src="" alt="Scene" />
-        </div>
-      </section>
+    <main class="hero-content">
+      <section class="hero-panel">
+        <header class="hero-header">
+          <h1 class="game-logo">MYTHRALE</h1>
+          <p class="game-tagline">
+            Velkommen til Mythrale, <span id="player-name-display"></span>.
+          </p>
+        </header>
 
-      <section class="scene-text">
-        <div id="scene-id" class="scene-id"></div>
-        <div id="scene-description" class="scene-description"></div>
-
-        <div class="scene-stats">
-          <span id="courage">Courage: 0</span>
-          <span id="kindness">Kindness: 0</span>
+        <!-- Her kommer scenen inn -->
+        <div class="scene-visual">
+          <div class="image-placeholder">
+            <img id="scene-image" src="" alt="Scene" />
+          </div>
         </div>
 
-        <div id="choices" class="choices"></div>
+        <div class="scene-text">
+          <div id="scene-id" class="scene-id"></div>
+          <div id="scene-description" class="scene-description"></div>
+
+          <div class="scene-stats">
+            <span id="courage">Courage: 0</span>
+            <span id="kindness">Kindness: 0</span>
+          </div>
+
+          <div id="choices" class="choices"></div>
+        </div>
+
+        <div class="footer-actions">
+          <button id="restart-btn">Start på nytt</button>
+        </div>
       </section>
     </main>
   </div>
 
-  <!-- SCRIPT -->
   <script src="script.js"></script>
 </body>
 </html>
