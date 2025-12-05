@@ -2,89 +2,86 @@
 <html lang="no">
 <head>
   <meta charset="UTF-8" />
-  <title>Mythrale – En liten magisk fortelling</title>
+  <title>Mythrale – En magisk interaktiv fortelling</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-  <!-- =========================== -->
-  <!-- LANDING (forside) -->
-  <!-- =========================== -->
-  <div id="landing" class="hero-background" style="background-image: url('img/Start_bakgrun.png');">
-    <div class="overlay"></div>
+<!-- ======================= -->
+<!--   BAKGRUNNSMUSIKK       -->
+<!-- ======================= -->
+<audio id="bg-music" loop>
+  <source src="img/music.mp3" type="audio/mpeg">
+</audio>
 
-    <main class="hero-content">
-      <section class="hero-panel">
-        <header class="hero-header">
-          <h1 class="game-logo">MYTHRALE</h1>
-          <p class="game-tagline">
-            Der lyset og skyggene møtes, og små valg får store følger.
-          </p>
-        </header>
+<button id="music-toggle" class="music-btn hidden">🎵 Musikk av/på</button>
 
-        <p class="hero-text">
-          Du står ved kanten av en skjult dal, med nattehimmel som gløder svakt over fjellene.
-        </p>
-        <p class="hero-text">
-          Når du trer inn i Mythrale, vil hvert valg forme reisen din.
-        </p>
+<!-- ======================= -->
+<!--   LANDING / FORSIDE     -->
+<!-- ======================= -->
+<div id="landing" class="hero-background" style="background-image: url('img/Start_bakgrun.png');">
+  <div class="overlay"></div>
 
-        <div class="hero-actions">
-          <div class="name-input-group">
-            <label for="player-name">Navnet ditt</label>
-            <input id="player-name" type="text" placeholder="Skriv navnet du vil bruke..." />
-          </div>
+  <main class="hero-content fade-in">
+    <section class="hero-panel">
+      <header class="hero-header">
+        <h1 class="game-logo">MYTHRALE</h1>
+        <p class="game-tagline">Der lyset og skyggene møtes…</p>
+      </header>
 
-          <button id="start-btn" class="primary-btn">
-            Start reisen
-          </button>
+      <p class="hero-text">Du står ved kanten av en skjult dal. Luften glitrer av gammel magi.</p>
+      <p class="hero-text">Skriv inn navnet ditt for å begynne reisen.</p>
+
+      <div class="hero-actions">
+        <div class="name-input-group">
+          <label for="player-name">Navnet ditt</label>
+          <input id="player-name" type="text" placeholder="Navn..." />
         </div>
 
-        <p class="hero-note">
-          Etter dette velger du karakter – jente eller gutt – før historien starter.
+        <button id="start-btn" class="primary-btn">Start reisen</button>
+      </div>
+    </section>
+  </main>
+</div>
+
+
+<!-- ======================= -->
+<!--   SPILLVINDU            -->
+<!-- ======================= -->
+<div id="game-root" class="hero-background hidden" style="background-image: url('img/Start_bakgrun.png');">
+  <div class="overlay"></div>
+
+  <main class="hero-content fade-in">
+    <section class="hero-panel fade-box">
+
+      <header class="hero-header">
+        <h1 class="game-logo">MYTHRALE</h1>
+        <p class="game-tagline">
+          Velkommen, <span id="player-name-display"></span>.
         </p>
-      </section>
-    </main>
-  </div>
+      </header>
 
+      <div class="scene-text">
+        <div id="scene-id" class="scene-id"></div>
+        <div id="scene-description" class="scene-description"></div>
 
-  <!-- =========================== -->
-  <!-- GAME ROOT (selve spillet) -->
-  <!-- =========================== -->
-  <div id="game-root" class="hero-background hidden" style="background-image: url('img/Start_bakgrun.png');">
-    <div class="overlay"></div>
-
-    <main class="hero-content">
-      <section class="hero-panel">
-
-        <header class="hero-header">
-          <h1 class="game-logo">MYTHRALE</h1>
-          <p class="game-tagline">
-            Velkommen, <span id="player-name-display"></span>.
-          </p>
-        </header>
-
-        <div class="scene-text">
-          <div id="scene-id" class="scene-id"></div>
-          <div id="scene-description" class="scene-description"></div>
-
-          <div class="scene-stats">
-            <span id="courage">Courage: 0</span>
-            <span id="kindness">Kindness: 0</span>
-          </div>
-
-          <div id="choices" class="choices"></div>
+        <div class="scene-stats">
+          <span id="courage">Courage: 0</span>
+          <span id="kindness">Kindness: 0</span>
         </div>
 
-        <div class="footer-actions">
-          <button id="restart-btn">Start på nytt</button>
-        </div>
+        <div id="choices" class="choices"></div>
+      </div>
 
-      </section>
-    </main>
-  </div>
+      <div class="footer-actions">
+        <button id="restart-btn">Start på nytt</button>
+      </div>
+    </section>
+  </main>
+</div>
 
-  <script src="script.js"></script>
+
+<script src="script.js"></script>
 </body>
 </html>

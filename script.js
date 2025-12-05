@@ -1,9 +1,9 @@
 // ======================================================
-// MYTHRALE – SCRIPT ENGINE (FULLY UPDATED)
+// MYTHRALE — COMPLETE GAME ENGINE WITH FADE + MUSIC
 // ======================================================
 
 // ------------------------
-// 1) PLAYER DATA
+// PLAYER DATA
 // ------------------------
 const player = {
   name: "",
@@ -14,17 +14,14 @@ const player = {
 
 let currentSceneId = "choose_character";
 
-
 // ------------------------
-// 2) ALL SCENES
+// SCENES
 // ------------------------
 const scenes = {
 
   choose_character: {
     id: "choose_character",
-    image: "",
     text: (name) => `${name}, før reisen begynner må du velge hvem du vil være.`,
-
     choices: [
       {
         text: "Jente",
@@ -41,193 +38,224 @@ const scenes = {
 
   intro: {
     id: "intro",
-    text: (name) =>
-      `En svak blå glød fyller nattehimmelen over Mythrale. Du står alene på en fjellhylle.`,
+    text: (name) => `${name} tar sitt første steg inn i Mythrale…`,
     choices: [
-      { text: "Gå nærmere portalen.", next: "at_portal", effects: { courage: +1 } },
-      { text: "Stå stille og observer lyset.", next: "intro_reflect", effects: { kindness: +1 } }
+      { text: "Gå nærmere portalen", next: "portal", effects: { courage: +1 } },
+      { text: "Observer lyset", next: "intro_reflect", effects: { kindness: +1 } }
     ],
   },
 
   intro_reflect: {
     id: "intro_reflect",
-    text: (name) => `${name} står stille og kjenner roen i luften.`,
+    text: (name) => `${name} lar tankene vandre mens portalen pulserer svakt.`,
     choices: [
-      { text: "Gå mot portalen.", next: "at_portal", effects: { courage: +1 } }
-    ],
+      { text: "Gå mot portalen", next: "portal", effects: { courage: +1 } }
+    ]
   },
 
-  at_portal: {
-    id: "at_portal",
-    text: () => `Portalen flimrer som om den venter på deg.`,
+  portal: {
+    id: "portal",
+    text: () => `Portalen venter. En svak dirring fyller luften.`,
     choices: [
-      { text: "Gå gjennom portalen.", next: "hall", effects: { courage: +1 } }
-    ],
+      { text: "Gå inn", next: "hall", effects: { courage: +1 } }
+    ]
   },
 
   hall: {
     id: "hall",
-    text: () =>
-      `Du trer inn i en krystallbelyst hall. En elev ber stille om hjelp.`,
+    text: () => `En elev vinker forsiktig — "Unnskyld… kan du hjelpe meg?"`,
     choices: [
-      { text: "Hjelp eleven.", next: "help_student", effects: { kindness: +1 } },
-      { text: "Gå videre alene.", next: "ignore_student" }
-    ],
+      { text: "Hjelp henne", next: "help", effects: { kindness: +1 } },
+      { text: "Gå videre", next: "ignore" }
+    ]
   },
 
-  help_student: {
-    id: "help_student",
-    text: (name) => `${name} viser eleven riktig dør.`,
-    choices: [{ text: "Fortsett", next: "crystal_choice" }],
-  },
-
-  ignore_student: {
-    id: "ignore_student",
-    text: () => `Hallen føles plutselig kaldere.`,
-    choices: [{ text: "Se deg rundt", next: "crystal_choice" }],
-  },
-
-  crystal_choice: {
-    id: "crystal_choice",
-    text: () => `Tre krystaller svever foran deg.`,
+  help: {
+    id: "help",
+    text: () => `Hun smiler varmt — "Takk! Jeg håper vi møtes igjen."`,
     choices: [
-      { text: "Blå (empati)", next: "ending_empathy", effects: { kindness: +1 } },
-      { text: "Gylden (mot)", next: "ending_courage", effects: { courage: +1 } },
-      { text: "Klar (balanse)", next: "ending_balance", effects: { courage: +1, kindness: +1 } },
-    ],
+      { text: "Fortsett", next: "crystals" }
+    ]
   },
 
-  ending_empathy: {
-    id: "ending_empathy",
-    text: () => `Den blå krystallen fyller deg med ro.`,
-    choices: [{ text: "Start på nytt", next: "choose_character" }],
+  ignore: {
+    id: "ignore",
+    text: () => `Hallen blir kaldere rundt deg…`,
+    choices: [
+      { text: "Fortsett", next: "crystals" }
+    ]
   },
 
-  ending_courage: {
-    id: "ending_courage",
-    text: () => `Den gylne krystallen pulserer varmt.`,
-    choices: [{ text: "Start på nytt", next: "choose_character" }],
+  crystals: {
+    id: "crystals",
+    text: () => `Tre krystaller svever foran deg — hvilken velger du?`,
+    choices: [
+      { text: "Blå (empati)", next: "end_emp", effects: { kindness: +1 } },
+      { text: "Gylden (mot)", next: "end_cour", effects: { courage: +1 } },
+      { text: "Klar (balanse)", next: "end_bal", effects: { kindness: +1, courage: +1 } }
+    ]
   },
 
-  ending_balance: {
-    id: "ending_balance",
-    text: () => `Den klare krystallen lyser i alle farger.`,
-    choices: [{ text: "Start på nytt", next: "choose_character" }],
+  end_emp: {
+    id: "end_emp",
+    text: () => `Den blå krystallen fyller deg med ro og varme.`,
+    choices: [
+      { text: "Start på nytt", next: "choose_character" }
+    ]
+  },
+
+  end_cour: {
+    id: "end_cour",
+    text: () => `Den gylne krystallen pulserer som et hjerte.`,
+    choices: [
+      { text: "Start på nytt", next: "choose_character" }
+    ]
+  },
+
+  end_bal: {
+    id: "end_bal",
+    text: () => `Den klare krystallen vibrerer — balanse er din styrke.`,
+    choices: [
+      { text: "Start på nytt", next: "choose_character" }
+    ]
   },
 
 };
 
-
-// ---------------------------
-// 3) APPLY EFFECTS
-// ---------------------------
+// ------------------------
+// APPLY EFFECTS
+// ------------------------
 function applyEffects(effects) {
   if (!effects) return;
-
   if (effects.gender) player.gender = effects.gender;
   if (typeof effects.courage === "number") player.courage += effects.courage;
   if (typeof effects.kindness === "number") player.kindness += effects.kindness;
 }
 
-
-// ---------------------------
-// 4) RENDER SCENE
-// ---------------------------
+// ------------------------
+// RENDER SCENE
+// ------------------------
 function renderScene() {
   const scene = scenes[currentSceneId];
 
-  // Elements
-  const sceneIdEl = document.getElementById("scene-id");
-  const sceneDescriptionEl = document.getElementById("scene-description");
-  const choicesEl = document.getElementById("choices");
-  const courageEl = document.getElementById("courage");
-  const kindnessEl = document.getElementById("kindness");
-  const sceneImageEl = document.getElementById("scene-image");
-
-  // Scene ID
-  sceneIdEl.textContent = "Scene: " + scene.id;
-
-  // Description
-  sceneDescriptionEl.textContent =
+  document.getElementById("scene-id").textContent = "Scene: " + scene.id;
+  document.getElementById("scene-description").textContent =
     typeof scene.text === "function" ? scene.text(player.name) : scene.text;
 
-  // Hide scene image for character select
+  document.getElementById("courage").textContent = "Courage: " + player.courage;
+  document.getElementById("kindness").textContent = "Kindness: " + player.kindness;
+
+  const choicesBox = document.getElementById("choices");
+  choicesBox.innerHTML = "";
+
+  // Character select? → Render portraits
   if (scene.id === "choose_character") {
-    sceneImageEl.style.display = "none";
-  } else {
-    sceneImageEl.style.display = "block";
+    choicesBox.classList.add("character-grid");
+
+    scene.choices.forEach(choice => {
+      const card = document.createElement("div");
+      card.className = "char-card";
+
+      const isFemale = choice.effects.gender === "female";
+
+      card.innerHTML = `
+        <img class="char-portrait" src="img/${isFemale ? "Select_Character_female.png" : "Select_Character_Male.png"}" />
+        <div class="char-main">${choice.text}</div>
+        <div class="char-sub">${isFemale ? "Rolig og modig." : "Stille eller sterk."}</div>
+      `;
+
+      card.addEventListener("click", () => {
+        applyEffects(choice.effects);
+        fadeScene(() => {
+          currentSceneId = choice.next;
+          renderScene();
+        });
+      });
+
+      choicesBox.appendChild(card);
+    });
+
+    return;
   }
 
-  // Stats
-  courageEl.textContent = "Courage: " + player.courage;
-  kindnessEl.textContent = "Kindness: " + player.kindness;
-
-  // Choices
-  choicesEl.innerHTML = "";
-
-  // Character select grid
-  if (scene.id === "choose_character") {
-    choicesEl.classList.add("character-grid");
-  } else {
-    choicesEl.classList.remove("character-grid");
-  }
+  // Normal choices
+  choicesBox.classList.remove("character-grid");
 
   scene.choices.forEach(choice => {
     const btn = document.createElement("button");
-
-    if (scene.id === "choose_character") {
-      const isFemale = choice.effects.gender === "female";
-
-      btn.className = "char-card";
-      btn.innerHTML = `
-        <img class="char-portrait" src="img/${isFemale ? "Select_Character_female.png" : "Select_Character_Male.png"}" />
-        <div class="char-main">${choice.text}</div>
-        <div class="char-sub">${isFemale ? "Rolig, modig, nysgjerrig." : "Leken, sta eller stille."}</div>
-      `;
-    } else {
-      btn.className = "choice-btn";
-      btn.textContent = choice.text;
-    }
+    btn.className = "choice-btn";
+    btn.textContent = choice.text;
 
     btn.addEventListener("click", () => {
       applyEffects(choice.effects);
-      currentSceneId = choice.next;
-      renderScene();
+      fadeScene(() => {
+        currentSceneId = choice.next;
+        renderScene();
+      });
     });
 
-    choicesEl.appendChild(btn);
+    choicesBox.appendChild(btn);
   });
 }
 
+// ------------------------
+// FADE TRANSITION
+// ------------------------
+function fadeScene(callback) {
+  const panel = document.querySelector(".hero-panel");
+  panel.classList.add("fade-box-out");
 
-// ---------------------------
-// 5) START / RESTART
-// ---------------------------
+  setTimeout(() => {
+    callback();
+    panel.classList.remove("fade-box-out");
+    panel.classList.add("fade-box");
+  }, 300);
+}
+
+/* Fade-out style */
+const fadeOutStyle = document.createElement("style");
+fadeOutStyle.innerHTML = `
+.fade-box-out {
+  opacity: 0;
+  transform: translateY(15px);
+  transition: 0.3s ease;
+}
+`;
+document.head.appendChild(fadeOutStyle);
+
+// ------------------------
+// MUSIC CONTROL
+// ------------------------
+const music = document.getElementById("bg-music");
+const musicBtn = document.getElementById("music-toggle");
+
+musicBtn.classList.remove("hidden");
+musicBtn.addEventListener("click", () => {
+  if (music.paused) {
+    music.play();
+    musicBtn.textContent = "🔊 Musikk av/på";
+  } else {
+    music.pause();
+    musicBtn.textContent = "🔇 Musikk av/på";
+  }
+});
+
+// ------------------------
+// START / RESTART
+// ------------------------
 document.addEventListener("DOMContentLoaded", () => {
-  const startButton = document.getElementById("start-btn");
+  const startBtn = document.getElementById("start-btn");
   const restartBtn = document.getElementById("restart-btn");
-  const nameInput = document.getElementById("player-name");
-  const landing = document.getElementById("landing");
-  const gameRoot = document.getElementById("game-root");
-  const nameDisplay = document.getElementById("player-name-display");
 
-  function startGame() {
-    player.name = nameInput.value.trim() || "Reisende";
-    player.gender = "";
-    player.courage = 0;
-    player.kindness = 0;
+  startBtn.addEventListener("click", () => {
+    player.name = document.getElementById("player-name").value || "Reisende";
+    document.getElementById("player-name-display").textContent = player.name;
 
-    currentSceneId = "choose_character";
-
-    landing.classList.add("hidden");
-    gameRoot.classList.remove("hidden");
-
-    nameDisplay.textContent = player.name;
+    document.getElementById("landing").classList.add("hidden");
+    document.getElementById("game-root").classList.remove("hidden");
 
     renderScene();
-  }
-
-  startButton.addEventListener("click", startGame);
+  });
 
   restartBtn.addEventListener("click", () => {
     currentSceneId = "choose_character";
@@ -236,6 +264,3 @@ document.addEventListener("DOMContentLoaded", () => {
     renderScene();
   });
 });
-// ======================================================
-// END OF SCRIPT
-// ====================================================== 

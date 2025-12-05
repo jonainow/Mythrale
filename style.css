@@ -1,7 +1,6 @@
 /* =========================================================
-   GLOBAL BASE
+   BASE
    ========================================================= */
-
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
@@ -9,37 +8,38 @@ body {
   color: #e5e7eb;
 }
 
+.hidden {
+  display: none !important;
+}
+
 /* =========================================================
    FULLSCREEN BACKGROUND
    ========================================================= */
-
 .hero-background {
   position: relative;
   min-height: 100vh;
+  width: 100%;
   background-size: cover;
   background-position: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at top, rgba(0,0,0,0.55), rgba(0,0,0,0.9));
+  background: radial-gradient(circle at top, rgba(0,0,0,0.55), rgba(0,0,0,0.92));
   z-index: 1;
 }
 
 /* =========================================================
-   WINDOW PANEL (HERO-PANEL)
+   CENTERED WINDOW PANEL
    ========================================================= */
-
 .hero-content {
   position: relative;
   z-index: 2;
-  width: 100%;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 2rem 1rem;
 }
 
@@ -49,80 +49,71 @@ body {
   background: rgba(15, 23, 42, 0.95);
   padding: 2rem;
   border-radius: 1.4rem;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.04);
   box-shadow: 0 25px 60px rgba(0,0,0,0.5);
+  animation: fadeBox 0.6s ease;
 }
 
+@keyframes fadeBox {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================================
+   FADE ANIMATION
+   ========================================================= */
+.fade-in {
+  animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* =========================================================
+   HEADER & TEXT
+   ========================================================= */
 .hero-header {
   text-align: center;
-  margin-bottom: 1rem;
 }
 
 .game-logo {
   font-size: 2rem;
   letter-spacing: 0.15em;
+  margin-bottom: 0.3rem;
 }
 
 .game-tagline {
-  font-size: 0.9rem;
   opacity: 0.8;
-  margin-top: -0.4rem;
-}
-
-/* =========================================================
-   TEXT + STATS
-   ========================================================= */
-
-.scene-text {
-  margin-top: 1rem;
-}
-
-.scene-id {
-  font-size: 0.7rem;
-  opacity: 0.5;
-}
-
-.scene-description {
-  margin-top: 0.5rem;
   margin-bottom: 1rem;
-  line-height: 1.6;
-}
-
-.scene-stats {
-  display: flex;
-  gap: 1rem;
-  font-size: 0.85rem;
-  opacity: 0.8;
 }
 
 /* =========================================================
    BUTTONS
    ========================================================= */
-
-.choice-btn,
 .primary-btn,
+.choice-btn,
 #restart-btn {
   background: #0f172a;
-  color: #e5e7eb;
   border: 1px solid #1f2937;
+  color: #e5e7eb;
   padding: 0.75rem 1rem;
   border-radius: 0.7rem;
-  margin-top: 0.7rem;
   cursor: pointer;
   transition: 0.15s ease;
 }
 
-.choice-btn:hover,
 .primary-btn:hover,
+.choice-btn:hover,
 #restart-btn:hover {
-  background: #1a253a;
+  background: #1c2a45;
   border-color: #38bdf8;
 }
 
 /* =========================================================
    CHARACTER SELECT GRID
    ========================================================= */
-
 .character-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -133,18 +124,17 @@ body {
 .char-card {
   background: #0f172a;
   border: 1px solid #1f2937;
-  border-radius: 1rem;
   padding: 1rem;
+  border-radius: 1rem;
   cursor: pointer;
   text-align: center;
-  transition: 0.2s ease;
+  transition: 0.15s;
 }
 
 .char-card:hover {
   transform: translateY(-4px);
   border-color: #38bdf8;
-  box-shadow: 0 12px 25px rgba(0,0,0,0.4);
-  background: linear-gradient(to bottom, #0b1120, #0f172a);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.45);
 }
 
 .char-portrait {
@@ -152,25 +142,36 @@ body {
   height: 220px;
   object-fit: cover;
   border-radius: 0.7rem;
-  margin-bottom: 0.5rem;
 }
 
 .char-main {
   font-size: 1.1rem;
-  font-weight: 700;
+  font-weight: bold;
+  margin-top: 0.4rem;
 }
 
 .char-sub {
   font-size: 0.85rem;
-  opacity: 0.7;
-}
-
-/* Hide normal scene image until actual story scenes */
-#scene-image {
-  display: none;
+  opacity: 0.75;
 }
 
 /* =========================================================
-   RESPONSIVE
+   MUSIC BUTTON
    ========================================================= */
-   
+.music-btn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 999;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  border: 1px solid #38bdf8;
+  padding: 0.5rem 0.8rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: 0.15s;
+}
+
+.music-btn:hover {
+  background: rgba(56,189,248,0.25);
+}
