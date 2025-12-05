@@ -49,45 +49,47 @@
   </div>
 
 
-  <!-- =========================== -->
-  <!-- GAME ROOT (selve spillet) -->
-  <!-- =========================== -->
-  <div id="game-root" class="game-background hidden">
-    <main class="hero-content">
-      <section class="hero-panel">
+<!-- =========================== -->
+<!-- GAME ROOT (selve spillet) -->
+<!-- =========================== -->
+<div id="game-root" class="hero-background hidden" style="background-image: url('img/Start_bakgrun.png');">
+  <div class="overlay"></div>
 
-        <header class="hero-header">
-          <h1 class="game-logo">MYTHRALE</h1>
-          <p class="game-tagline">
-            Velkommen, <span id="player-name-display"></span>.
-          </p>
-        </header>
+  <main class="hero-content">
+    <section class="hero-panel">
 
-        <div class="scene-visual">
-          <div class="image-placeholder">
-            <img id="scene-image" src="" alt="Scene" />
-          </div>
+      <header class="hero-header">
+        <h1 class="game-logo">MYTHRALE</h1>
+        <p class="game-tagline">
+          Velkommen, <span id="player-name-display"></span>.
+        </p>
+      </header>
+
+      <div class="scene-visual">
+        <div class="image-placeholder">
+          <img id="scene-image" src="" alt="Scene" />
+        </div>
+      </div>
+
+      <div class="scene-text">
+        <div id="scene-id" class="scene-id"></div>
+        <div id="scene-description" class="scene-description"></div>
+
+        <div class="scene-stats">
+          <span id="courage">Courage: 0</span>
+          <span id="kindness">Kindness: 0</span>
         </div>
 
-        <div class="scene-text">
-          <div id="scene-id" class="scene-id"></div>
-          <div id="scene-description" class="scene-description"></div>
+        <div id="choices" class="choices"></div>
+      </div>
 
-          <div class="scene-stats">
-            <span id="courage">Courage: 0</span>
-            <span id="kindness">Kindness: 0</span>
-          </div>
+      <div class="footer-actions">
+        <button id="restart-btn">Start på nytt</button>
+      </div>
 
-          <div id="choices" class="choices"></div>
-        </div>
-
-        <div class="footer-actions">
-          <button id="restart-btn">Start på nytt</button>
-        </div>
-
-      </section>
-    </main>
-  </div>
+    </section>
+  </main>
+</div>
 
   <script src="script.js"></script>
 </body>
